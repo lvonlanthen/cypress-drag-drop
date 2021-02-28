@@ -1,12 +1,18 @@
 name: Build and test cypress-drag-drop
 
-# TODO: Only on pull requests / master?
+# TODO: Test on all pushes or only for pull requests or commits on master?
 on: push
+#on:
+#  push:
+#    branches: [ master ]
+#  pull_request:
+#    branches: [ master ]
 
 jobs:
   test:
     runs-on: ubuntu-latest
 
+    # TODO: Does it make sense to test against multiple node versions?
     strategy:
       matrix:
         node-version: [ 10.x, 12.x, 14.x ]
@@ -22,6 +28,10 @@ jobs:
 
       - name: Install
         run: yarn install --frozen-lockfile
+
+      # TODO: Does it make sense to lint? Used to fail: https://github.com/lvonlanthen/cypress-drag-drop/runs/1997470419
+      - name: Lint
+        run: yarn lint
 
       - name: Test
         run: yarn test:ci
