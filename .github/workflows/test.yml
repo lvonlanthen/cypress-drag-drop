@@ -1,0 +1,20 @@
+name: Build and test cypress-drag-drop
+
+# TODO: Only on pull requests / master?
+on: push
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    # TODO: Strategy?
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Install
+        run: yarn install --frozen-lockfile
+
+      - name: Test
+        run: yarn test:ci
